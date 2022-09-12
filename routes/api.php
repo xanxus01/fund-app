@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:sanctum')->group(function (){
+    Route::get('test', function (){
+       return'te';
+    });
+});
+Route::get('login', function (Request $request){
+    $user = \App\Models\User::firstOrCreate(['email' => '312823281@qq.com'], [
+        'name' => 'test',
+        'password' => 'test',
+    ]);
+    dd($user->createToken('login'));
+});
