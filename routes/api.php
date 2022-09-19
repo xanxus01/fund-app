@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +22,8 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('test', function (){
        return'te';
     });
+    Route::any('my', [UserController::class, 'my']);
 });
-Route::get('login', function (Request $request){
-    $user = \App\Models\User::firstOrCreate(['email' => '312823281@qq.com'], [
-        'name' => 'test',
-        'password' => 'test',
-    ]);
-    dd($user->createToken('login'));
-});
+Route::any('login', [UserController::class, 'login']);
+
+Route::any('logon', [UserController::class, 'logon']);
